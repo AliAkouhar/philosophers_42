@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:06:37 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/05/25 11:08:26 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:10:27 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+long	ft_atol(char *str);
 
 #endif

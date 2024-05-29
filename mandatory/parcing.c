@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:55:24 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/05/25 12:25:24 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:12:43 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	check_sign(char *str)
 			if (str[i] == '+')
 				plus++;
 			if (str[i + 1] == '\0' || i != 0 || mince > 1 || plus > 1)
-				retturn (1);
+				return (1);
 		}
 		i++;
 	}

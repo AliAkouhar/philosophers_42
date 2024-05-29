@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 11:06:41 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/05/29 15:15:16 by aakouhar         ###   ########.fr       */
+/*   Created: 2024/05/29 15:09:38 by aakouhar          #+#    #+#             */
+/*   Updated: 2024/05/29 15:10:11 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "utils.h"
 
-int main(int ac, char **av)
+long	ft_atol(char *str)
 {
-    t_data  data;
-    
-    if (!(ac == 5 || ac == 6))
-        return (printf("Error, enter 5 or 6 arguments\n"), 1);
-    if (parcing(ac, av, &data))
-        return (1);
-    if (ft_init(ac, av, &data))
-        return (1);
+	int		i;
+	int		signe;
+	long	res;
+
+	i = 0;
+	signe = 1;
+	res = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			signe *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res * signe);
 }
