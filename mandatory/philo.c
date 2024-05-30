@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 12:27:32 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/05/29 15:58:02 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:17:30 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int ft_alloc(t_data *data)
 
 int ft_init_args(char **av, t_data *data)
 {
+    data->death_flag = 1;
     data->n_philo = ft_atol(av[1]);
     data->t_die = ft_atol(av[2]);
     data->t_eat = ft_atol(av[3]);
@@ -41,13 +42,15 @@ int ft_create_forks(t_data *data)
     int i;
 
     i = -1;
-
+    if (pthread_mutex_init(&data->death_lock, NULL))
+        return (printf("Error while init mutex"));
     while (++i < data->n_philo)
+    {
+        if (pthread_mutex_init(&data->philo[i].lock_status, NULL))
+            return (printf("Error while init mutex"));
         if (pthread_mutex_init(&data->forks[i], NULL))
-        {
-            printf("Error while creating forks\n");
-            return (1);
-        }
+            return (printf("Error while creating forks\n"));
+    }
     data->philo[0].left_fork = &data->forks[0];
     data->philo[0].right_fork = &data->forks[data->n_philo - 1];
     i = 0;
@@ -63,7 +66,10 @@ int ft_create_philos(t_data *data)
 {
     int i;
 
+    // printf();
     i = -1;
+    if(pthread_create(&data->monitore,NULL, death_func, data))
+        return (1);
     while (++i < data->n_philo)
     {
         data->philo[i].data = data;
@@ -78,6 +84,8 @@ int ft_create_philos(t_data *data)
         if (pthread_join(data->philo[i].th, NULL))
             return (printf("error while joining\n"));
     }
+    if (pthread_join(data->monitore, NULL))
+        return (1);
     return (0);
 }
 

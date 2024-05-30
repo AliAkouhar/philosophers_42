@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 11:06:37 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/05/30 17:45:25 by aakouhar         ###   ########.fr       */
+/*   Created: 2024/05/30 15:03:54 by aakouhar          #+#    #+#             */
+/*   Updated: 2024/05/30 16:27:33 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-#define UTILS_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
+#include "utils.h"
 
+uint64_t gettime(void)
+{
+    struct timeval tv;
 
-long	ft_atol(char *str);
-uint64_t gettime(void);
-
-#endif
+    if (gettimeofday(&tv, NULL))
+        return (printf("error from get time of day\n"));
+    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
