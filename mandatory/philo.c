@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 12:27:32 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/05/30 18:17:30 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:46:49 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int ft_create_philos(t_data *data)
 
     // printf();
     i = -1;
-    if(pthread_create(&data->monitore,NULL, death_func, data))
-        return (1);
     while (++i < data->n_philo)
     {
         data->philo[i].data = data;
@@ -78,6 +76,8 @@ int ft_create_philos(t_data *data)
             return (1);
     // printf("hello %d\n", data->philo[i].id);
     }
+    if(pthread_create(&data->monitore,NULL, death_func, data))
+        return (1);
     i = -1;
     while (++i < data->n_philo)
     {

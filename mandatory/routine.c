@@ -6,7 +6,7 @@
 /*   By: aakouhar <aakouhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:33:12 by aakouhar          #+#    #+#             */
-/*   Updated: 2024/05/30 18:28:11 by aakouhar         ###   ########.fr       */
+/*   Updated: 2024/05/31 10:50:04 by aakouhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void    *death_func(void *p)
     int i;
 
     data = (t_data *)p;
-    time = gettime();
     while (data->death_flag)
     {
         i = -1;
         while (++i < data->n_philo)
         {
-                printf("%i hhhhhh %llu\n", i, time - data->philo[i].last_meal);
+               /*  printf("%i hhhhhh %llu\n", i, time - data->philo[i].last_meal);
                 printf("hhhh %llu\n", time);
-                printf("hh %llu\n", data->philo[i].last_meal);
-             if (time - data->philo[i].last_meal >= data->t_die && data->philo[i].status != 1)
+                printf("hh %llu\n", data->philo[i].last_meal); */
+             if (gettime() - data->philo[i].last_meal >= data->t_die && data->philo[i].eat_flag != 1)
              {
+                // printf("-------time is %llu , lastmealtime is %llu-----\n", gettime() - data->philo[i].last_meal, data->philo[i].last_meal);
                 printf("%i DIED\n", data->philo[i].id);
                 data->death_flag = 0;
                 // break;
